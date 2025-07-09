@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cosmoblade | Портфолио</title>
+    <title>🔍 Cosmoblade | Портфолио</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔍</text></svg>">
     <style>
         :root {
             --primary-color: #64f0ff;
@@ -52,6 +53,15 @@
             align-items: center;
             padding: 0 15px;
             border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+            gap: 15px;
+        }
+        
+        .finder-icon {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.9);
         }
         
         .dots {
@@ -101,18 +111,24 @@
         }
         
         .icon {
-            width: clamp(80px, 25vw, 120px);
-            height: clamp(80px, 25vw, 120px);
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 50%;
-            margin: 0 auto 25px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: clamp(2rem, 8vw, 3rem);
-            border: 2px solid rgba(255, 255, 255, 0.08);
-            transition: transform 0.4s;
-        }
+        width: clamp(80px, 25vw, 120px);
+        height: clamp(80px, 25vw, 120px);
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 50%;
+        margin: 0 auto 25px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: clamp(2rem, 8vw, 3rem);
+        border: 2px solid rgba(255, 255, 255, 0.08);
+        transition: transform 0.4s;
+    }
+    
+    .watermelon {
+        /* Убраны градиент и тень */
+        background: rgba(255, 255, 255, 0.05);
+    }
+        
         
         .stack {
             display: flex;
@@ -135,25 +151,43 @@
             white-space: nowrap;
         }
         
-        .contact {
+        .contacts-title {
             margin-top: 30px;
-            font-size: clamp(1rem, 4vw, 1.2rem);
-            background: rgba(255, 255, 255, 0.05);
-            padding: 12px 25px;
-            border-radius: 50px;
-            transition: all 0.3s;
-            text-align: center;
+            font-size: clamp(1.1rem, 4vw, 1.4rem);
+            color: var(--primary-color);
+            margin-bottom: 15px;
         }
         
-        .contact a {
-            color: var(--primary-color);
-            text-decoration: none;
+        .contact-item {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
+            margin: 10px 0;
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50px;
+            transition: all 0.3s;
+            text-decoration: none;
+            color: var(--primary-color);
+            width: fit-content;
         }
         
-        .contact a::after {
+        .contact-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .contact-icon {
+            font-size: 1.2em;
+        }
+        
+        .contact-text {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .contact-text::after {
             content: "↗";
             font-size: 0.9em;
             opacity: 0.7;
@@ -177,8 +211,8 @@
                 padding: 6px 12px;
             }
             
-            .contact {
-                padding: 10px 20px;
+            .contact-item {
+                padding: 8px 16px;
             }
         }
 
@@ -203,20 +237,13 @@
                 background: rgba(100, 240, 255, 0.2);
                 transform: translateY(-3px);
             }
-            
-            .contact:hover {
-                background: rgba(255, 255, 255, 0.1);
-            }
-            
-            .contact a:hover {
-                color: var(--secondary-color);
-            }
         }
     </style>
 </head>
 <body>
     <div class="mac-window">
         <div class="title-bar">
+            </div>
             <div class="dots">
                 <div class="dot dot-red"></div>
                 <div class="dot dot-yellow"></div>
@@ -224,7 +251,7 @@
             </div>
         </div>
         <div class="content">
-            <div class="icon">🚀</div>
+            <div class="icon watermelon">🍉</div>
             <h1>Cosmoblade</h1>
             <p>14 лет | Начинающий full-stack разработчик</p>
             
@@ -238,10 +265,17 @@
                 <span class="tech">Git</span>
             </div>
             
-            <div class="contact">
-                <a href="https://t.me/cosmoblade" target="_blank">Telegram @cosmoblade</a>
-                <a href="https://github.com/cosmoblade" target="_blank">GitHub</a>
-            </div>
+            <h3 class="contacts-title">Как связаться</h3>
+            
+            <a href="https://t.me/cosmoblade" target="_blank" class="contact-item">
+                <span class="contact-icon">📨</span>
+                <span class="contact-text">Telegram @cosmoblade</span>
+            </a>
+            
+            <a href="https://github.com/cosmoblade" target="_blank" class="contact-item">
+                <span class="contact-icon">💻</span>
+                <span class="contact-text">GitHub cosmoblade</span>
+            </a>
         </div>
     </div>
 
@@ -260,7 +294,7 @@
                             document.querySelector('.mac-window').style.transform = 'scale(1)';
                         }, 300);
                     } else {
-                        alert('🚀 Добро пожаловать в моё космическое портфолио!');
+                        alert('🍉 Арбузный привет! Добро пожаловать в моё портфолио!');
                     }
                 }, 200);
             });
