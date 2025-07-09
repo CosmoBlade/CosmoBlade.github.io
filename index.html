@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cosmoblade | Портфолио</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(45deg, #1a1a2e, #16213e, #0f3460);
+            color: #f8f9fa;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .mac-window {
+            width: 85%;
+            max-width: 850px;
+            height: 75vh;
+            background: rgba(40, 40, 45, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5),
+                        0 0 0 1px rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        
+        .mac-window:hover {
+            transform: scale(1.01);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6),
+                        0 0 0 1px rgba(255, 255, 255, 0.1);
+        }
+        
+        .title-bar {
+            height: 42px;
+            background: linear-gradient(to bottom, #323238, #2a2a30);
+            display: flex;
+            align-items: center;
+            padding: 0 15px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+        }
+        
+        .dots {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .dot-red { background: #ff5f57; box-shadow: 0 0 5px #ff5f5755; }
+        .dot-yellow { background: #ffbc2e; box-shadow: 0 0 5px #ffbc2e55; }
+        .dot-green { background: #28c840; box-shadow: 0 0 5px #28c84055; }
+        
+        .dot:hover {
+            transform: scale(1.15);
+        }
+        
+        .content {
+            padding: 40px;
+            text-align: center;
+            height: calc(100% - 42px);
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        h1 {
+            font-size: 2.8em;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, #64f0ff, #9089fc);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 2px 10px rgba(100, 240, 255, 0.2);
+            letter-spacing: -0.5px;
+        }
+        
+        p {
+            font-size: 1.3em;
+            line-height: 1.7;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .icon {
+            width: 120px;
+            height: 120px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            margin: 0 auto 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3em;
+            border: 2px solid rgba(255, 255, 255, 0.08);
+            transition: transform 0.4s, box-shadow 0.4s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .icon:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            background: rgba(255, 255, 255, 0.08);
+        }
+        
+        .stack {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+            margin: 30px 0;
+            max-width: 600px;
+        }
+        
+        .tech {
+            background: rgba(100, 240, 255, 0.1);
+            padding: 10px 18px;
+            border-radius: 24px;
+            font-size: 1em;
+            border: 1px solid rgba(100, 240, 255, 0.2);
+            transition: all 0.3s;
+            cursor: default;
+        }
+        
+        .tech:hover {
+            background: rgba(100, 240, 255, 0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(100, 240, 255, 0.1);
+        }
+        
+        .contact {
+            margin-top: 40px;
+            font-size: 1.2em;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 12px 25px;
+            border-radius: 50px;
+            transition: all 0.3s;
+        }
+        
+        .contact:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .contact a {
+            color: #64f0ff;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .contact a:hover {
+            color: #9089fc;
+            text-decoration: none;
+        }
+        
+        .contact a::after {
+            content: "↗";
+            font-size: 0.9em;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+    <div class="mac-window">
+        <div class="title-bar">
+            <div class="dots">
+                <div class="dot dot-red"></div>
+                <div class="dot dot-yellow"></div>
+                <div class="dot dot-green"></div>
+            </div>
+        </div>
+        <div class="content">
+            <div class="icon">🚀</div>
+            <h1>Cosmoblade</h1>
+            <p>14 лет | Начинающий разработчик с фокусом на full-stack решениях</p>
+            
+            <div class="stack">
+                <span class="tech">Python</span>
+                <span class="tech">JavaScript</span>
+                <span class="tech">Java</span>
+                <span class="tech">C++</span>
+                <span class="tech">Linux</span>
+                <span class="tech">HTML/CSS</span>
+                <span class="tech">Git</span>
+            </div>
+            
+            <div class="contact">
+                <a href="https://t.me/cosmoblade" target="_blank">Telegram: @cosmoblade</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Анимация при клике на кнопки заголовка
+        document.querySelectorAll('.dot').forEach(dot => {
+            dot.addEventListener('click', function() {
+                this.style.transform = 'scale(0.8)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)';
+                    if(this.classList.contains('dot-red')) {
+                        alert('❌ Это не закроет окно - просто красивая кнопка!');
+                    } else if(this.classList.contains('dot-yellow')) {
+                        document.querySelector('.mac-window').style.transform = 'scale(0.98)';
+                        setTimeout(() => {
+                            document.querySelector('.mac-window').style.transform = 'scale(1)';
+                        }, 300);
+                    } else {
+                        alert('🚀 Добро пожаловать в моё космическое портфолио!');
+                    }
+                }, 200);
+            });
+        });
+    </script>
+</body>
+</html>
