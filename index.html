@@ -111,24 +111,18 @@
         }
         
         .icon {
-        width: clamp(80px, 25vw, 120px);
-        height: clamp(80px, 25vw, 120px);
-        background: rgba(255, 255, 255, 0.05);
-        border-radius: 50%;
-        margin: 0 auto 25px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: clamp(2rem, 8vw, 3rem);
-        border: 2px solid rgba(255, 255, 255, 0.08);
-        transition: transform 0.4s;
-    }
-    
-    .watermelon {
-        /* Убраны градиент и тень */
-        background: rgba(255, 255, 255, 0.05);
-    }
-        
+            width: clamp(80px, 25vw, 120px);
+            height: clamp(80px, 25vw, 120px);
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            margin: 0 auto 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: clamp(2rem, 8vw, 3rem);
+            border: 2px solid rgba(255, 255, 255, 0.08);
+            transition: transform 0.4s;
+        }
         
         .stack {
             display: flex;
@@ -193,7 +187,6 @@
             opacity: 0.7;
         }
 
-        /* Адаптация для маленьких экранов */
         @media (max-width: 600px) {
             body {
                 padding: 10px;
@@ -216,7 +209,6 @@
             }
         }
 
-        /* Анимации */
         @media (hover: hover) {
             .mac-window:hover {
                 transform: scale(1.01);
@@ -243,6 +235,9 @@
 <body>
     <div class="mac-window">
         <div class="title-bar">
+            <div class="finder-icon">
+                <span>🔍</span>
+                <span>Finder</span>
             </div>
             <div class="dots">
                 <div class="dot dot-red"></div>
@@ -251,7 +246,7 @@
             </div>
         </div>
         <div class="content">
-            <div class="icon watermelon">🍉</div>
+            <div class="icon">🍉</div>
             <h1>Cosmoblade</h1>
             <p>14 лет | Начинающий full-stack разработчик</p>
             
@@ -280,7 +275,6 @@
     </div>
 
     <script>
-        // Анимация при клике на кнопки заголовка
         document.querySelectorAll('.dot').forEach(dot => {
             dot.addEventListener('click', function() {
                 this.style.transform = 'scale(0.8)';
