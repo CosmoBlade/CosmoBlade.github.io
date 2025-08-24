@@ -254,6 +254,7 @@
                 <span class="tech">Linux</span>
                 <span class="tech">HTML/CSS</span>
                 <span class="tech">Git</span>
+                <span class="tech">Go(Golang)</span>
             </div>
             
             <h3 class="contacts-title">Как связаться</h3>
@@ -277,14 +278,14 @@
                 setTimeout(() => {
                     this.style.transform = 'scale(1)';
                     if(this.classList.contains('dot-red')) {
-                        alert('❌ Это не закроет окно - просто красивая кнопка!');
+                        alert('Нет, ты не закроешь');
                     } else if(this.classList.contains('dot-yellow')) {
                         document.querySelector('.mac-window').style.transform = 'scale(0.98)';
                         setTimeout(() => {
                             document.querySelector('.mac-window').style.transform = 'scale(1)';
                         }, 300);
                     } else {
-                        alert('🍉 Арбузный привет! Добро пожаловать в моё портфолио!');
+                        alert('ЫАЛЛЫЛАР!');
                     }
                 }, 200);
             });
