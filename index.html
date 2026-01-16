@@ -3,291 +3,509 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cosmoblade | Портфолио</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔍</text></svg>">
+    <title>cosmoblade</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔪</text></svg>">
     <style>
-        :root {
-            --primary-color: #64f0ff;
-            --secondary-color: #9089fc;
-            --bg-dark: #0f172a;
-            --window-bg: rgba(30, 30, 40, 0.95);
-        }
-        
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
-        }
-        
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(45deg, var(--bg-dark), #16213e, #0f3460);
-            color: #f8f9fa;
-            min-height: 100vh;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        .mac-window {
-            width: 100%;
-            max-width: 900px;
-            height: auto;
-            min-height: 500px;
-            background: var(--window-bg);
-            backdrop-filter: blur(20px);
-            border-radius: 16px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5),
-                        0 0 0 1px rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-            margin: 20px 0;
-        }
-        
-        .title-bar {
-            height: 42px;
-            background: linear-gradient(to bottom, #323238, #2a2a30);
-            display: flex;
-            align-items: center;
-            padding: 0 15px;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.3);
-            gap: 15px;
-        }
-        
-        .finder-icon {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 14px;
-            color: rgba(255, 255, 255, 0.9);
-        }
-        
-        .dots {
-            display: flex;
-            gap: 10px;
-        }
-        
-        .dot {
-            width: 14px;
-            height: 14px;
-            border-radius: 50%;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-        
-        .dot-red { background: #ff5f57; }
-        .dot-yellow { background: #ffbc2e; }
-        .dot-green { background: #28c840; }
-        
-        .content {
-            padding: 30px 20px;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        h1 {
-            font-size: clamp(2rem, 6vw, 2.8rem);
-            margin-bottom: 15px;
-            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            text-shadow: 0 2px 10px rgba(100, 240, 255, 0.2);
-            line-height: 1.2;
-        }
-        
-        p {
-            font-size: clamp(1rem, 4vw, 1.3rem);
-            line-height: 1.6;
-            opacity: 0.9;
-            max-width: 600px;
-            margin: 0 auto 20px;
-            padding: 0 10px;
-        }
-        
-        .icon {
-            width: clamp(80px, 25vw, 120px);
-            height: clamp(80px, 25vw, 120px);
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 50%;
-            margin: 0 auto 25px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: clamp(2rem, 8vw, 3rem);
-            border: 2px solid rgba(255, 255, 255, 0.08);
-            transition: transform 0.4s;
-        }
-        
-        .stack {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 10px;
-            margin: 20px 0;
-            max-width: 600px;
-            padding: 0 10px;
-        }
-        
-        .tech {
-            background: rgba(100, 240, 255, 0.1);
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: clamp(0.8rem, 3vw, 1rem);
-            border: 1px solid rgba(100, 240, 255, 0.2);
-            transition: all 0.3s;
-            cursor: default;
-            white-space: nowrap;
-        }
-        
-        .contacts-title {
-            margin-top: 30px;
-            font-size: clamp(1.1rem, 4vw, 1.4rem);
-            color: var(--primary-color);
-            margin-bottom: 15px;
-        }
-        
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin: 10px 0;
-            padding: 10px 20px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 50px;
-            transition: all 0.3s;
-            text-decoration: none;
-            color: var(--primary-color);
-            width: fit-content;
-        }
-        
-        .contact-item:hover {
-            background: rgba(255, 255, 255, 0.1);
-            transform: translateY(-2px);
-        }
-        
-        .contact-icon {
-            font-size: 1.2em;
-        }
-        
-        .contact-text {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-        
-        .contact-text::after {
-            content: "↗";
-            font-size: 0.9em;
-            opacity: 0.7;
+            box-sizing: border-box;
         }
 
-        @media (max-width: 600px) {
+        body {
+            font-family: 'Courier New', monospace;
+            background-color: #0a0a0a;
+            color: #e0e0e0;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .terminal-header {
+            border: 1px solid #333;
+            background: #111;
+            padding: 15px;
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .terminal-header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #00ff88, transparent);
+            animation: scanline 3s linear infinite;
+        }
+
+        @keyframes scanline {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .prompt {
+            color: #00ff88;
+            font-weight: bold;
+        }
+
+        .command {
+            color: #e0e0e0;
+            margin-left: 10px;
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 8px;
+            height: 16px;
+            background-color: #00ff88;
+            margin-left: 5px;
+            animation: blink 1s infinite;
+            vertical-align: middle;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        .main-content {
+            padding: 20px;
+        }
+
+        .name {
+            font-size: 2.5rem;
+            color: #fff;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
+            letter-spacing: 2px;
+            overflow: hidden;
+            border-right: 3px solid #00ff88;
+            white-space: nowrap;
+            width: 0;
+            animation: typing 1.5s steps(10, end) forwards, blink-caret 0.75s step-end infinite;
+            animation-delay: 1s;
+        }
+
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: #00ff88 }
+        }
+
+        .title {
+            color: #888;
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+            border-left: 3px solid #00ff88;
+            padding-left: 15px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s ease forwards;
+            animation-delay: 2.5s;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Секция стека */
+        .section-title {
+            color: #00ff88;
+            font-size: 1.2rem;
+            margin: 40px 0 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #333;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s ease forwards;
+            animation-delay: 3s;
+        }
+
+        .stack-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s ease forwards;
+            animation-delay: 3.2s;
+        }
+
+        .stack-item {
+            background: #111;
+            border: 1px solid #222;
+            padding: 15px;
+            transition: all 0.2s;
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .stack-item:nth-child(1) { animation: fadeInUp 0.5s ease forwards 3.4s; }
+        .stack-item:nth-child(2) { animation: fadeInUp 0.5s ease forwards 3.5s; }
+        .stack-item:nth-child(3) { animation: fadeInUp 0.5s ease forwards 3.6s; }
+        .stack-item:nth-child(4) { animation: fadeInUp 0.5s ease forwards 3.7s; }
+        .stack-item:nth-child(5) { animation: fadeInUp 0.5s ease forwards 3.8s; }
+        .stack-item:nth-child(6) { animation: fadeInUp 0.5s ease forwards 3.9s; }
+        .stack-item:nth-child(7) { animation: fadeInUp 0.5s ease forwards 4.0s; }
+        .stack-item:nth-child(8) { animation: fadeInUp 0.5s ease forwards 4.1s; }
+
+        .stack-item:hover {
+            border-color: #00ff88;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 255, 136, 0.1);
+        }
+
+        .stack-item::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 100%;
+            background: #00ff88;
+            transform: scaleY(0);
+            transition: transform 0.3s;
+        }
+
+        .stack-item:hover::before {
+            transform: scaleY(1);
+        }
+
+        .tech-name {
+            color: #fff;
+            font-weight: bold;
+            margin-bottom: 5px;
+            font-size: 1.1rem;
+        }
+
+        .tech-level {
+            color: #888;
+            font-size: 0.9rem;
+            display: inline-block;
+            padding: 2px 8px;
+            background: #222;
+            border-radius: 3px;
+            margin-top: 5px;
+        }
+
+        .level-high { color: #00ff88; }
+        .level-mid { color: #ffaa00; }
+        .level-low { color: #ff5555; }
+
+        .contacts {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s ease forwards;
+            animation-delay: 4.3s;
+        }
+
+        .contact-link {
+            color: #e0e0e0;
+            text-decoration: none;
+            padding: 12px 20px;
+            border: 1px solid #333;
+            background: #111;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .contact-link:hover {
+            border-color: #00ff88;
+            background: rgba(0, 255, 136, 0.05);
+            transform: translateX(5px);
+        }
+
+        .contact-icon {
+            font-size: 1.2rem;
+        }
+
+        .status-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: #111;
+            border-top: 1px solid #333;
+            padding: 10px 20px;
+            font-size: 0.9rem;
+            color: #888;
+            display: flex;
+            justify-content: space-between;
+            z-index: 100;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards;
+            animation-delay: 4.6s;
+        }
+
+        .status-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #00ff88;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        /* Эффекты */
+        .glitch {
+            position: relative;
+        }
+
+        .glitch::before {
+            content: attr(data-text);
+            position: absolute;
+            left: 2px;
+            text-shadow: -1px 0 #ff00ff;
+            top: 0;
+            color: #e0e0e0;
+            background: #0a0a0a;
+            overflow: hidden;
+            clip-path: inset(0 0 0 0);
+            animation: glitch-anim 5s infinite linear alternate-reverse;
+        }
+
+        @keyframes glitch-anim {
+            0% { clip-path: inset(10% 0 90% 0); }
+            5% { clip-path: inset(80% 0 5% 0); }
+            10% { clip-path: inset(20% 0 60% 0); }
+            15% { clip-path: inset(50% 0 30% 0); }
+            20% { clip-path: inset(80% 0 5% 0); }
+            25% { clip-path: inset(10% 0 90% 0); }
+            30% { clip-path: inset(40% 0 40% 0); }
+            35% { clip-path: inset(70% 0 10% 0); }
+            40% { clip-path: inset(20% 0 60% 0); }
+            45% { clip-path: inset(90% 0 5% 0); }
+            50% { clip-path: inset(30% 0 60% 0); }
+            55% { clip-path: inset(60% 0 20% 0); }
+            60% { clip-path: inset(10% 0 80% 0); }
+            65% { clip-path: inset(85% 0 5% 0); }
+            70% { clip-path: inset(25% 0 65% 0); }
+            75% { clip-path: inset(45% 0 45% 0); }
+            80% { clip-path: inset(95% 0 5% 0); }
+            85% { clip-path: inset(15% 0 75% 0); }
+            90% { clip-path: inset(35% 0 55% 0); }
+            95% { clip-path: inset(75% 0 15% 0); }
+            100% { clip-path: inset(5% 0 90% 0); }
+        }
+
+        @media (max-width: 768px) {
+            .stack-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-link {
+                min-width: 100%;
+            }
+            
+            .name {
+                font-size: 2rem;
+            }
+            
+            .status-bar {
+                font-size: 0.8rem;
+                padding: 8px 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
             body {
                 padding: 10px;
             }
             
-            .content {
-                padding: 25px 15px;
+            .main-content {
+                padding: 10px;
             }
             
-            .stack {
-                gap: 8px;
-            }
-            
-            .tech {
-                padding: 6px 12px;
-            }
-            
-            .contact-item {
-                padding: 8px 16px;
-            }
-        }
-
-        @media (hover: hover) {
-            .mac-window:hover {
-                transform: scale(1.01);
-                box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6),
-                            0 0 0 1px rgba(255, 255, 255, 0.1);
-            }
-            
-            .dot:hover {
-                transform: scale(1.15);
-            }
-            
-            .icon:hover {
-                transform: scale(1.1) rotate(5deg);
-                background: rgba(255, 255, 255, 0.08);
-            }
-            
-            .tech:hover {
-                background: rgba(100, 240, 255, 0.2);
-                transform: translateY(-3px);
+            .name {
+                font-size: 1.8rem;
             }
         }
     </style>
 </head>
 <body>
-    <div class="mac-window">
-        <div class="title-bar">
-            <div class="dots">
-                <div class="dot dot-red"></div>
-                <div class="dot dot-yellow"></div>
-                <div class="dot dot-green"></div>
+    <div class="container">
+        <div class="terminal-header">
+            <span class="prompt">user@cosmoblade:~$</span>
+            <span class="command">cat portfolio.txt</span>
+            <span class="cursor"></span>
+        </div>
+
+        <div class="main-content">
+            <h1 class="name glitch" data-text="cosmoblade">cosmoblade</h1>
+            <div class="title">14yo | full-stack dev | создаю вещи, которые работают</div>
+
+            <h2 class="section-title">стек</h2>
+            <div class="stack-grid">
+                <div class="stack-item">
+                    <div class="tech-name">python</div>
+                    <div>Бэкенд, скрипты, автоматизация, API</div>
+                    <span class="tech-level level-high">продвинутый</span>
+                </div>
+                
+                <div class="stack-item">
+                    <div class="tech-name">javascript</div>
+                    <div>Фронтенд, Node.js, браузерные скрипты</div>
+                    <span class="tech-level level-high">продвинутый</span>
+                </div>
+                
+                <div class="stack-item">
+                    <div class="tech-name">java</div>
+                    <div>бэкенд</div>
+                    <span class="tech-level level-low">изучаю</span>
+                </div>
+                
+                <div class="stack-item">
+                    <div class="tech-name">c++</div>
+                    <div>Системное программирование, алгоритмы</div>
+                    <span class="tech-level level-low">изучаю</span>
+                </div>
+                
+                <div class="stack-item">
+                    <div class="tech-name">linux</div>
+                    <div>сервера, bash, CLI терминал</div>
+                    <span class="tech-level level-high">продвинутый</span>
+                </div>
+                
+                <div class="stack-item">
+                    <div class="tech-name">html/css</div>
+                    <div>Верстка сайта по готовому дизайну</div>
+                    <span class="tech-level level-mid">средний</span>
+                </div>
+                
+                <div class="stack-item">
+                    <div class="tech-name">git</div>
+                    <div>Контроль версий</div>
+                    <span class="tech-level level-high">продвинутый</span>
+                </div>
+                
+                <div class="stack-item">
+                    <div class="tech-name">go</div>
+                    <div>Бэкенд, утилиты, CLI</div>
+                    <span class="tech-level level-low">изучаю</span>
+                </div>
+            </div>
+
+            <h2 class="section-title">контакты</h2>
+            <div class="contacts">
+                <a href="https://t.me/xeouxx" target="_blank" class="contact-link">
+                    <span>telegram</span>
+                </a>
+                
+                <a href="https://github.com/cosmoblade" target="_blank" class="contact-link">
+                    <span>github: cosmoblade</span>
+                </a>
             </div>
         </div>
-        <div class="content">
-            <div class="icon">🍉</div>
-            <h1>Cosmoblade</h1>
-            <p>14 лет | Начинающий full-stack разработчик</p>
-            
-            <div class="stack">
-                <span class="tech">Python</span>
-                <span class="tech">JavaScript</span>
-                <span class="tech">Java</span>
-                <span class="tech">C++</span>
-                <span class="tech">Linux</span>
-                <span class="tech">HTML/CSS</span>
-                <span class="tech">Git</span>
-                <span class="tech">Go(Golang)</span>
-            </div>
-            
-            <h3 class="contacts-title">Как связаться</h3>
-            
-            <a href="https://t.me/cosmoblade" target="_blank" class="contact-item">
-                <span class="contact-icon">📨</span>
-                <span class="contact-text">Telegram @cosmoblade</span>
-            </a>
-            
-            <a href="https://github.com/cosmoblade" target="_blank" class="contact-item">
-                <span class="contact-icon">💻</span>
-                <span class="contact-text">GitHub cosmoblade</span>
-            </a>
+    </div>
+
+    <div class="status-bar">
+        <div class="status-item">
+            <div class="dot"></div>
+            <span>статус: online</span>
+        </div>
+        <div class="status-item">
+            <span>система: win11</span>
+        </div>
+        <div class="status-item">
+            <span>время: <span id="time">--:--</span></span>
         </div>
     </div>
 
     <script>
-        document.querySelectorAll('.dot').forEach(dot => {
-            dot.addEventListener('click', function() {
-                this.style.transform = 'scale(0.8)';
+        function updateTime() {
+            const now = new Date();
+            const timeString = now.getHours().toString().padStart(2, '0') + ':' + 
+                             now.getMinutes().toString().padStart(2, '0') + ':' + 
+                             now.getSeconds().toString().padStart(2, '0');
+            document.getElementById('time').textContent = timeString;
+        }
+        
+        updateTime();
+        setInterval(updateTime, 1000);
+        
+        const commandText = "cat portfolio.txt";
+        const commandElement = document.querySelector('.command');
+        const cursor = document.querySelector('.cursor');
+        
+        let i = 0;
+        function typeWriter() {
+            if (i < commandText.length) {
+                commandElement.textContent += commandText.charAt(i);
+                i++;
+                setTimeout(typeWriter, 50);
+            } else {
+                cursor.style.animation = 'none';
+                cursor.style.opacity = '0';
+                
                 setTimeout(() => {
-                    this.style.transform = 'scale(1)';
-                    if(this.classList.contains('dot-red')) {
-                        alert('Нет, ты не закроешь');
-                    } else if(this.classList.contains('dot-yellow')) {
-                        document.querySelector('.mac-window').style.transform = 'scale(0.98)';
-                        setTimeout(() => {
-                            document.querySelector('.mac-window').style.transform = 'scale(1)';
-                        }, 300);
-                    } else {
-                        alert('не чето не хочу пока');
-                    }
-                }, 200);
+                    document.querySelector('.name').classList.add('glitch');
+                }, 1000);
+            }
+        }
+        
+        setTimeout(() => {
+            commandElement.textContent = "";
+            typeWriter();
+        }, 500);
+        
+        const stackItems = document.querySelectorAll('.stack-item');
+        setInterval(() => {
+            const randomItem = stackItems[Math.floor(Math.random() * stackItems.length)];
+            randomItem.style.transform = 'translateX(' + (Math.random() * 4 - 2) + 'px)';
+            
+            setTimeout(() => {
+                randomItem.style.transform = '';
+            }, 100);
+        }, 3000);
+        
+        const links = document.querySelectorAll('.contact-link');
+        links.forEach(link => {
+            link.addEventListener('mouseenter', () => {
+                link.style.color = '#00ff88';
+            });
+            
+            link.addEventListener('mouseleave', () => {
+                link.style.color = '#e0e0e0';
             });
         });
     </script>
