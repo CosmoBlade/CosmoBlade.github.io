@@ -1,0 +1,22 @@
+{
+  "tariffs": [
+    {
+      "name": "Стандарт",
+      "description": "RTX 5070, i5-14900KF, 24GB RAM",
+      "price": 500,
+      "price_detail": "руб/час"
+    },
+    {
+      "name": "На двоих",
+      "description": "RTX 5070, i5-14900KF, 24GB RAM",
+      "price": 400,
+      "price_detail": "руб/час на человека"
+    },
+    {
+      "name": "VIP",
+      "description": "RTX 5090 OC, Ryzen 7 9800X3D, 64GB RAM",
+      "price": 900,
+      "price_detail": "руб/час"
+    }
+  ]
+}

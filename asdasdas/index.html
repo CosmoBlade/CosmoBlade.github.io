@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DarkGames</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="plaska">
+        <div class="logo">DarkGames</div>
+        <div class="nav-links">
+            <a href="#about" class="nav-btn">О нас</a>
+            <a href="#trf" class="nav-btn">Тарифы</a>
+            <a href="#confirm-buy" class="nav-btn">Бронь</a>
+            <a href="#footer" class="nav-btn">Контакты</a>
+        </div>
+    </div>
+
+    <div id="header">
+        <h1>DarkGames</h1>
+        <h2>Играй по темному</h2>
+        <a href="#about"><button id="more">Узнать больше</button></a><br><br>
+        <a href="#trf"><button id="buy">забронировать место</button></a>
+    </div>
+
+    <div id="about">
+        <div class="about-container">
+            <div class="about-text">
+                <h1>Почему именно мы?</h1>
+                <h3>
+                    В нём вас ждёт тёмный подвал с неоновой подсветкой. 15 мест для игроков, готовых погрузиться в захватывающий игровой мир. В этом подвале 
+                    проведена великолепная вентиляция, благодаря которой вы не вспотеете и не задохнётесь. А игра на новейшем железе будет приятной, что вы не заметите, 
+                    как пройдёт весь день. Заходите в наш клуб и погружайтесь в мир ужасов, ведь на наших ПК уже есть хоррор игры с платформ Steam и EpicGames. Также 
+                    для полного погружения свет с навесных ламп будет отсутствовать. Плата за 1 час – 500 рублей. 
+                    И она того стоит, ведь в этих ПК стоит такие новейшие железо!
+                </h3>
+            </div>
+            <div class="about-img">
+                <img src="photo.jpg" alt="фото пк клуба" id="pho1">
+            </div>
+        </div>
+    </div>
+
+    <div id="trf">
+        <div id="default" class="tariff-block">
+            <h3 class="t-name"></h3>
+            <div class="tariff-description"></div>
+            <div class="tariff-price">
+                <span class="price-val"></span> <small class="price-detail"></small>
+            </div>
+            <button class="buy-button">Оформить</button>
+        </div>
+
+        <div id="booth" class="tariff-block">
+            <h3 class="t-name"></h3>
+            <div class="tariff-description"></div>
+            <div class="tariff-price">
+                <span class="price-val"></span> <small class="price-detail"></small>
+            </div>
+            <button class="buy-button">Оформить</button>
+        </div>
+
+        <div id="VIP" class="tariff-block">
+            <h3 class="t-name"></h3>
+            <div class="tariff-description"></div>
+            <div class="tariff-price">
+                <span class="price-val"></span> <small class="price-detail"></small>
+            </div>
+            <button class="buy-button">Оформить</button>
+        </div>
+    </div>
+
+    <div id="confirm-buy" class="booking-section">
+        <h2>Оформление брони</h2>
+        <form id="bookingForm">
+            <label for="tariffSelect">Выберите тариф:</label>
+            <select id="tariffSelect" name="tariff" required></select>
+
+            <label for="hours">Количество часов:</label>
+            <input type="number" id="hours" name="hours" min="1" max="24" value="1" required>
+
+            <label for="date">Выберите день:</label>
+            <input type="date" id="date" name="date" required>
+
+            <label for="email">Почта для связи:</label>
+            <input type="email" id="email" name="email" placeholder="example@mail.com" required>
+
+            <button type="submit" id="submitBooking">Забронировать</button>
+        </form>
+    </div>
+
+    <footer id="footer">
+        <div class="footer-container">
+            <div class="footer-info">
+                <h3>DarkGames</h3>
+                <p>© 2026 Все права защищены</p>
+                <p>Игровой клуб для настоящих ценителей темноты и мощного железа</p>
+            </div>
+            <div class="footer-contacts">
+                <h4>Свяжитесь с нами</h4>
+                <p>📞 +888 888 88 88</p>
+                <p>✉️ darkgames@yandex.ru</p>
+                <p>🕒 25/8</p>
+            </div>
+            <div class="footer-social">
+                <h4>Мы в соцсетях</h4>
+                <div class="social-links">
+                    <a href="#" class="social-link">ВКонтакте</a>
+                    <a href="#" class="social-link">Max</a>
+                    <a href="#" class="social-link">Maxcord</a>
+                    <a href="#" class="social-link">MaxTube</a>
+                </div>
+            </div>
+            <div class="footer-support">
+                <h4>Поддержка</h4>
+                <p>🛠️ Техническая поддержка: возможно</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>DarkGames. 2026. Все права не защищены. Копирование материалов разрешено.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
