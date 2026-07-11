@@ -1,513 +1,161 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>cosmoblade</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔪</text></svg>">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CosmoBlade Landing</title>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        * { box-sizing: border-box; }
+        html, body {
+            margin: 0; padding: 0;
+            font-family: 'IBM Plex Mono', monospace;
+            background-color: #000000; color: #ffffff;
+            scroll-behavior: smooth; line-height: 1.6;
         }
+        .container { width: 90%; max-width: 1100px; margin: 0 auto; padding: 4rem 0; position: relative; z-index: 1; }
 
-        body {
-            font-family: 'Courier New', monospace;
-            background-color: #0a0a0a;
-            color: #e0e0e0;
-            line-height: 1.6;
-            padding: 20px;
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
-
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            position: relative;
-        }
-
-        .terminal-header {
-            border: 1px solid #333;
-            background: #111;
-            padding: 15px;
-            margin-bottom: 30px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .terminal-header::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, #00ff88, transparent);
-            animation: scanline 3s linear infinite;
-        }
-
-        @keyframes scanline {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
-        }
-
-        .prompt {
-            color: #00ff88;
-            font-weight: bold;
-        }
-
-        .command {
-            color: #e0e0e0;
-            margin-left: 10px;
-        }
-
-        .cursor {
-            display: inline-block;
-            width: 8px;
-            height: 16px;
-            background-color: #00ff88;
-            margin-left: 5px;
-            animation: blink 1s infinite;
-            vertical-align: middle;
-        }
-
-        @keyframes blink {
-            0%, 50% { opacity: 1; }
-            51%, 100% { opacity: 0; }
-        }
-
-        .main-content {
-            padding: 20px;
-        }
-
-        .name {
-            font-size: 2.5rem;
-            color: #fff;
-            margin-bottom: 10px;
-            text-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
-            letter-spacing: 2px;
-            overflow: hidden;
-            border-right: 3px solid #00ff88;
-            white-space: nowrap;
-            width: 0;
-            animation: typing 1.5s steps(10, end) forwards, blink-caret 0.75s step-end infinite;
-            animation-delay: 1s;
-        }
-
-        @keyframes typing {
-            from { width: 0 }
-            to { width: 100% }
-        }
-
-        @keyframes blink-caret {
-            from, to { border-color: transparent }
-            50% { border-color: #00ff88 }
-        }
-
-        .title {
-            color: #888;
-            font-size: 1.1rem;
-            margin-bottom: 40px;
-            border-left: 3px solid #00ff88;
-            padding-left: 15px;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 0.8s ease forwards;
-            animation-delay: 2.5s;
-        }
-
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Секция стека */
-        .section-title {
-            color: #00ff88;
-            font-size: 1.2rem;
-            margin: 40px 0 20px;
-            padding-bottom: 10px;
+        /* Навигация */
+        .navbar {
+            background-color: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            position: sticky; top: 0; z-index: 1000;
             border-bottom: 1px solid #333;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 0.8s ease forwards;
-            animation-delay: 3s;
+            transition: background 0.3s, border 0.3s;
+        }
+        .navbar .container { padding: 1rem 0; display: flex; justify-content: space-between; align-items: center; }
+        .nav-links a { margin-left: 2rem; text-decoration: none; color: #fff; font-weight: 500; }
+        .navbar.navbar-light { background-color: rgba(255, 255, 255, 0.9); border-bottom: 1px solid #ddd; }
+        .navbar.navbar-light a { color: #000; }
+
+        /* Частицы */
+        #particles-js { 
+            position: fixed; width: 100%; height: 100%; z-index: 0; top: 0; left: 0; 
+            mix-blend-mode: difference;
         }
 
-        .stack-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 15px;
-            margin-bottom: 30px;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 0.8s ease forwards;
-            animation-delay: 3.2s;
-        }
-
-        .stack-item {
-            background: #111;
-            border: 1px solid #222;
-            padding: 15px;
-            transition: all 0.2s;
-            position: relative;
-            overflow: hidden;
-            opacity: 0;
-            transform: translateY(20px);
-        }
-
-        .stack-item:nth-child(1) { animation: fadeInUp 0.5s ease forwards 3.4s; }
-        .stack-item:nth-child(2) { animation: fadeInUp 0.5s ease forwards 3.5s; }
-        .stack-item:nth-child(3) { animation: fadeInUp 0.5s ease forwards 3.6s; }
-        .stack-item:nth-child(4) { animation: fadeInUp 0.5s ease forwards 3.7s; }
-        .stack-item:nth-child(5) { animation: fadeInUp 0.5s ease forwards 3.8s; }
-        .stack-item:nth-child(6) { animation: fadeInUp 0.5s ease forwards 3.9s; }
-        .stack-item:nth-child(7) { animation: fadeInUp 0.5s ease forwards 4.0s; }
-        .stack-item:nth-child(8) { animation: fadeInUp 0.5s ease forwards 4.1s; }
-
-        .stack-item:hover {
-            border-color: #00ff88;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 255, 136, 0.1);
-        }
-
-        .stack-item::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 3px;
-            height: 100%;
-            background: #00ff88;
-            transform: scaleY(0);
-            transition: transform 0.3s;
-        }
-
-        .stack-item:hover::before {
-            transform: scaleY(1);
-        }
-
-        .tech-name {
-            color: #fff;
-            font-weight: bold;
-            margin-bottom: 5px;
-            font-size: 1.1rem;
-        }
-
-        .tech-level {
-            color: #888;
-            font-size: 0.9rem;
-            display: inline-block;
-            padding: 2px 8px;
-            background: #222;
-            border-radius: 3px;
-            margin-top: 5px;
-        }
-
-        .level-high { color: #00ff88; }
-        .level-mid { color: #ffaa00; }
-        .level-low { color: #ff5555; }
-
-        .contacts {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin-top: 20px;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 0.8s ease forwards;
-            animation-delay: 4.3s;
-        }
-
-        .contact-link {
-            color: #e0e0e0;
-            text-decoration: none;
-            padding: 12px 20px;
-            border: 1px solid #333;
-            background: #111;
-            transition: all 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            flex: 1;
-            min-width: 200px;
-        }
-
-        .contact-link:hover {
-            border-color: #00ff88;
-            background: rgba(0, 255, 136, 0.05);
-            transform: translateX(5px);
-        }
-
-        .contact-icon {
-            font-size: 1.2rem;
-        }
-
-        .status-bar {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background: #111;
-            border-top: 1px solid #333;
-            padding: 10px 20px;
-            font-size: 0.9rem;
-            color: #888;
-            display: flex;
-            justify-content: space-between;
-            z-index: 100;
-            opacity: 0;
-            animation: fadeInUp 0.8s ease forwards;
-            animation-delay: 4.6s;
-        }
-
-        .status-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: #00ff88;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.3; }
-        }
-
-        /* Эффекты */
-        .glitch {
-            position: relative;
-        }
-
-        .glitch::before {
-            content: attr(data-text);
-            position: absolute;
-            left: 2px;
-            text-shadow: -1px 0 #ff00ff;
-            top: 0;
-            color: #e0e0e0;
-            background: #0a0a0a;
-            overflow: hidden;
-            clip-path: inset(0 0 0 0);
-            animation: glitch-anim 5s infinite linear alternate-reverse;
-        }
-
-        @keyframes glitch-anim {
-            0% { clip-path: inset(10% 0 90% 0); }
-            5% { clip-path: inset(80% 0 5% 0); }
-            10% { clip-path: inset(20% 0 60% 0); }
-            15% { clip-path: inset(50% 0 30% 0); }
-            20% { clip-path: inset(80% 0 5% 0); }
-            25% { clip-path: inset(10% 0 90% 0); }
-            30% { clip-path: inset(40% 0 40% 0); }
-            35% { clip-path: inset(70% 0 10% 0); }
-            40% { clip-path: inset(20% 0 60% 0); }
-            45% { clip-path: inset(90% 0 5% 0); }
-            50% { clip-path: inset(30% 0 60% 0); }
-            55% { clip-path: inset(60% 0 20% 0); }
-            60% { clip-path: inset(10% 0 80% 0); }
-            65% { clip-path: inset(85% 0 5% 0); }
-            70% { clip-path: inset(25% 0 65% 0); }
-            75% { clip-path: inset(45% 0 45% 0); }
-            80% { clip-path: inset(95% 0 5% 0); }
-            85% { clip-path: inset(15% 0 75% 0); }
-            90% { clip-path: inset(35% 0 55% 0); }
-            95% { clip-path: inset(75% 0 15% 0); }
-            100% { clip-path: inset(5% 0 90% 0); }
-        }
-
-        @media (max-width: 768px) {
-            .stack-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .contact-link {
-                min-width: 100%;
-            }
-            
-            .name {
-                font-size: 2rem;
-            }
-            
-            .status-bar {
-                font-size: 0.8rem;
-                padding: 8px 10px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            body {
-                padding: 10px;
-            }
-            
-            .main-content {
-                padding: 10px;
-            }
-            
-            .name {
-                font-size: 1.8rem;
-            }
-        }
+        /* Секции */
+        .hero { min-height: 100vh; display: flex; align-items: center; }
+        .hero-content { display: flex; justify-content: space-between; align-items: center; gap: 4rem; }
+        .about { background: #ffffff; color: #000000; min-height: 100vh; display: flex; align-items: center; }
+        
+        .code-block { background: #1e1e1e; border-radius: 12px; border: 1px solid #333; width: 100%; max-width: 450px; }
+        .window-header { background: #2d2d2d; padding: 12px; display: flex; gap: 8px; }
+        .dot { width: 12px; height: 12px; border-radius: 50%; }
+        .red { background: #ff5f56; } .yellow { background: #ffbd2e; } .green { background: #27c93f; }
+        .code-block pre { padding: 25px; margin: 0; color: #a9b7c6; }
+        
+        .btn { display: inline-block; padding: 12px 30px; border-radius: 8px; text-decoration: none; font-weight: 600; background-color: #fff; color: #000; }
+        .section-title { margin-bottom: 3rem; }
+        .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; width: 100%; }
+        .card { background: #111; padding: 2rem; border-radius: 12px; border: 1px solid #333; transition: 0.3s; }
+        .card:hover { transform: translateY(-10px); border-color: #555; }
+        .card a { color: #007bff; text-decoration: none; margin-top: 10px; display: inline-block; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="terminal-header">
-            <span class="prompt">user@cosmoblade:~$</span>
-            <span class="command">cat portfolio.txt</span>
-            <span class="cursor"></span>
+    <div id="particles-js"></div>
+
+    <header class="navbar">
+        <div class="container">
+            <div class="logo">Cosmoblade</div>
+            <nav class="nav-links">
+                <a href="#main">Main</a>
+                <a href="#about">About</a>
+                <a href="#projects">Projects</a>
+                <a href="#stack">Stack</a>
+            </nav>
         </div>
+    </header>
 
-        <div class="main-content">
-            <h1 class="name glitch" data-text="cosmoblade">cosmoblade</h1>
-            <div class="title">14yo | full-stack dev | создаю вещи, которые работают</div>
-
-            <h2 class="section-title">стек</h2>
-            <div class="stack-grid">
-                <div class="stack-item">
-                    <div class="tech-name">python</div>
-                    <div>Бэкенд, скрипты, автоматизация, API</div>
-                    <span class="tech-level level-high">продвинутый</span>
-                </div>
-                
-                <div class="stack-item">
-                    <div class="tech-name">javascript</div>
-                    <div>Фронтенд, Node.js, браузерные скрипты</div>
-                    <span class="tech-level level-high">продвинутый</span>
-                </div>
-                
-                <div class="stack-item">
-                    <div class="tech-name">java</div>
-                    <div>бэкенд</div>
-                    <span class="tech-level level-low">изучаю</span>
-                </div>
-                
-                <div class="stack-item">
-                    <div class="tech-name">c++</div>
-                    <div>Системное программирование, алгоритмы</div>
-                    <span class="tech-level level-low">изучаю</span>
-                </div>
-                
-                <div class="stack-item">
-                    <div class="tech-name">linux</div>
-                    <div>сервера, bash, CLI терминал</div>
-                    <span class="tech-level level-high">продвинутый</span>
-                </div>
-                
-                <div class="stack-item">
-                    <div class="tech-name">html/css</div>
-                    <div>Верстка сайта по готовому дизайну</div>
-                    <span class="tech-level level-mid">средний</span>
-                </div>
-                
-                <div class="stack-item">
-                    <div class="tech-name">git</div>
-                    <div>Контроль версий</div>
-                    <span class="tech-level level-high">продвинутый</span>
-                </div>
-                
-                <div class="stack-item">
-                    <div class="tech-name">go</div>
-                    <div>Бэкенд, утилиты, CLI</div>
-                    <span class="tech-level level-low">изучаю</span>
-                </div>
+    <section id="main" class="hero">
+        <div class="container hero-content">
+            <div class="hero-left">
+                <h1>CosmoBlade</h1>
+                <p>Programming is an art.</p>
+                <a href="#about" class="btn">Let’s start!</a>
             </div>
-
-            <h2 class="section-title">контакты</h2>
-            <div class="contacts">
-                <a href="https://t.me/xeouxx" target="_blank" class="contact-link">
-                    <span>telegram</span>
-                </a>
-                
-                <a href="https://github.com/cosmoblade" target="_blank" class="contact-link">
-                    <span>github: cosmoblade</span>
-                </a>
+            <div class="hero-right code-block">
+                <div class="window-header"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
+                <pre><code>PC = "Online"
+if PC == "Online":
+    human.work()
+else:
+    human.sleep()</code></pre>
             </div>
         </div>
-    </div>
+    </section>
 
-    <div class="status-bar">
-        <div class="status-item">
-            <div class="dot"></div>
-            <span>статус: online</span>
+    <section id="about" class="about">
+        <div class="container">
+            <h2>About me:</h2>
+            <p>I'm 15 years old and have good computer skills. I've been interested in technology and programming since I was 9 years old. I dream of becoming a penetration tester.</p>
         </div>
-        <div class="status-item">
-            <span>система: win11</span>
-        </div>
-        <div class="status-item">
-            <span>время: <span id="time">--:--</span></span>
-        </div>
-    </div>
+    </section>
 
+    <section id="projects" style="padding: 4rem 0;">
+        <div class="container">
+            <h2 class="section-title">My Projects</h2>
+            <div class="cards">
+                <div class="card">
+                    <h3>LetCode</h3>
+                    <p>AI agent, highly customizable and multi-provider support</p>
+                    <a href="https://github.com/CosmoBlade/LetCode" target="_blank">View on GitHub →</a>
+                </div>
+                <div class="card">
+                    <h3>GoFetch</h3>
+                    <p>A fast and lightweight utility for displaying system information.</p>
+                    <a href="https://github.com/CosmoBlade/gofetch" target="_blank">View on GitHub →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="stack" class="container">
+        <h2 class="section-title">My stack</h2>
+        <div class="cards">
+            <div class="card"><h3>Python</h3><p>Middle dev</p></div>
+            <div class="card"><h3>Golang</h3><p>Middle dev</p></div>
+            <div class="card"><h3>Assembly</h3><p>Junior dev</p></div>
+            <div class="card"><h3>Bash</h3><p>Junior dev</p></div>
+            <div class="card"><h3>C++</h3><p>Junior dev</p></div>
+            <div class="card"><h3>JS</h3><p>Middle dev</p></div>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
-        function updateTime() {
-            const now = new Date();
-            const timeString = now.getHours().toString().padStart(2, '0') + ':' + 
-                             now.getMinutes().toString().padStart(2, '0') + ':' + 
-                             now.getSeconds().toString().padStart(2, '0');
-            document.getElementById('time').textContent = timeString;
-        }
-        
-        updateTime();
-        setInterval(updateTime, 1000);
-        
-        const commandText = "cat portfolio.txt";
-        const commandElement = document.querySelector('.command');
-        const cursor = document.querySelector('.cursor');
-        
-        let i = 0;
-        function typeWriter() {
-            if (i < commandText.length) {
-                commandElement.textContent += commandText.charAt(i);
-                i++;
-                setTimeout(typeWriter, 50);
-            } else {
-                cursor.style.animation = 'none';
-                cursor.style.opacity = '0';
-                
-                setTimeout(() => {
-                    document.querySelector('.name').classList.add('glitch');
-                }, 1000);
-            }
-        }
-        
-        setTimeout(() => {
-            commandElement.textContent = "";
-            typeWriter();
-        }, 500);
-        
-        const stackItems = document.querySelectorAll('.stack-item');
-        setInterval(() => {
-            const randomItem = stackItems[Math.floor(Math.random() * stackItems.length)];
-            randomItem.style.transform = 'translateX(' + (Math.random() * 4 - 2) + 'px)';
-            
-            setTimeout(() => {
-                randomItem.style.transform = '';
-            }, 100);
-        }, 3000);
-        
-        const links = document.querySelectorAll('.contact-link');
-        links.forEach(link => {
-            link.addEventListener('mouseenter', () => {
-                link.style.color = '#00ff88';
-            });
-            
-            link.addEventListener('mouseleave', () => {
-                link.style.color = '#e0e0e0';
-            });
+        particlesJS("particles-js", {
+            "particles": {
+                "number": {"value": 80},
+                "color": {"value": "#ffffff"},
+                "size": {"value": 2},
+                "line_linked": {"enable": true, "color": "#ffffff", "opacity": 0.4},
+                "move": {"enable": true, "speed": 1.5}
+            },
+            "interactivity": {
+                "detect_on": "window",
+                "events": {
+                    "onhover": {"enable": true, "mode": "bubble"},
+                    "onclick": {"enable": true, "mode": "push"}
+                },
+                "modes": {
+                    "bubble": { "distance": 200, "size": 3, "duration": 2, "opacity": 1 },
+                    "push": { "particles_nb": 4 }
+                }
+            },
+            "retina_detect": true
         });
+
+        const navbar = document.querySelector('.navbar');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.id === 'about' ? navbar.classList.add('navbar-light') : navbar.classList.remove('navbar-light');
+                }
+            });
+        }, { threshold: 0.5 });
+        document.querySelectorAll('section').forEach(s => observer.observe(s));
     </script>
 </body>
 </html>
